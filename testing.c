@@ -1,6 +1,6 @@
-#include <stdarg.h>
+#include "library.h"
 
 main ()
 {
-	//fuckyo();
+
 }
