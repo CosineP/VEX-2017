@@ -41,19 +41,44 @@
 // #define driver2BtnR2 joy2Btn(8)
 // #define driver2BtnBack joy2Btn(9)
 
-// Library functions TODO: Vexify
+// Library functions
 
-// int turnsToEncoders(float turns) { return turns * 1440; }
-// float encodersToTurns(int encoders) { return encoders / 1440.0; }
-//
-// void setLeft(int speed)
+int turnsToEncoders(const float turns) { return turns * 627.2; }
+float encodersToTurns(const int encoders) { return encoders / 627.2; }
+
+float joystickExponent(const float joystickValue)
+{
+	int motorValue;
+    const int joystickZero = 7;
+	const int minimumValue = 9; // This value high = less control, less whining; this value low = more fine control, more whining, more magic blue smoke (out of 100)
+    const int backwards = joystickValue < 0 ? -1 : 1;
+	if (abs(joystickValue) < joystickZero)
+	{
+		motorValue = 0;
+	}
+    else if (abs(joystickValue) > 127)
+    {
+        motorValue = 100 * backwards;
+    }
+	else
+	{
+		// We will play the piccolo
+		const int motorMax = 127;
+		motorValue = (pow(1.05, abs(joystickValue)) / pow(1.05, 127)
+			* (motorMax - minimumValue) + minimumValue) * backwards;
+	}
+    return motorValue;
+}
+
+// TODO: Probably don't need
+// void setX(const int power)
 // {
-//     motor[lf] = speed;
-//     motor[lb] = speed;
+//     motor[x1] = power;
+//     motor[x2] = power;
 // }
 //
-// void setRight(int speed)
+// void setY(const int power)
 // {
-//     motor[rf] = speed;
-//     motor[rb] = speed;
+//     motor[y1] = power;
+//     motor[y2] = power;
 // }
