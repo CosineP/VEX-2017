@@ -10,15 +10,15 @@
 
 task main()
 {
-  for (int i=0; i<3; i++)
-  {
-    SensorValue[pneu] = 1;
-    SensorValue[pneu2] = 1;
-    sleep(2000);
-    SensorValue[pneu] = 0;
-    SensorValue[pneu2] = 0;
-    sleep(2000);
-  }
+	for (int i=0; i<3; i++)
+	{
+	SensorValue[pneu] = 1;
+	SensorValue[pneu2] = 1;
+	sleep(2000);
+	SensorValue[pneu] = 0;
+	SensorValue[pneu2] = 0;
+	sleep(2000);
+	}
   // while(1 == 1)
   // {
   //   motor[motorleft] = -(vexRT[Ch2]/2);
